@@ -7,6 +7,7 @@ import { compact, date, gb, params, usd } from "@/lib/format";
 import { metricLabel, metricUnit } from "@/lib/scaling";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
+import { models as allModels } from "@/data/mock";
 
 export function ExperimentCard({ e }: { e: Experiment }) {
   return (
@@ -27,8 +28,7 @@ export function ExperimentTable({ rows, selectable, selected, onSelectedChange, 
   rows: Experiment[]; selectable?: boolean; selected?: string[]; onSelectedChange?: (ids: string[]) => void; toolbar?: ReactNode; actions?: (e: Experiment) => ReactNode; pageSize?: number;
 }) {
   const navigate = useNavigate();
-  const models = useStore((s) => s.experiments) && useStore((s) => s.datasets);
-  const datasets = models;
+  const datasets = useStore((s) => s.datasets);
   const modelName = (id: string) => modelsById[id] ?? id;
   const cols: Column<Experiment>[] = [
     { key: "name", header: "Experiment", sort: (e) => e.name, cell: (e) => <div><div className="font-medium">{e.name}</div><Mono className="text-[11px] text-muted-foreground">{e.id}</Mono></div> },
@@ -47,7 +47,6 @@ export function ExperimentTable({ rows, selectable, selected, onSelectedChange, 
       onRowClick={(e) => navigate({ to: "/app/experiments/$id", params: { id: e.id } })} />
   );
 }
-import { models as allModels } from "@/data/mock";
 const modelsById: Record<string, string> = Object.fromEntries(allModels.map((m) => [m.id, m.name]));
 
 export function ModelCard({ m, selected, onSelect, href = true }: { m: Model; selected?: boolean; onSelect?: () => void; href?: boolean }) {
