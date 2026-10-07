@@ -71,13 +71,23 @@ function simulateRun(runId: string, expId: string) {
   }, 1200);
 }
 
+const persist = () => {
+  try { localStorage.setItem("scalar-session", JSON.stringify({ user: state.user, admin: state.admin })); } catch { /* ignore */ }
+};
+export function hydrateSession() {
+  try {
+    const raw = localStorage.getItem("scalar-session");
+    if (raw) { const v = JSON.parse(raw); set(() => ({ user: v.user, admin: !!v.admin })); }
+  } catch { /* ignore */ }
+}
+
 export const api = {
   login(email: string, name = "Researcher") {
-    set(() => ({ user: { name, email, workspace: "Forex Research" } }));
+    set(() => ({ user: { name, email, workspace: "Forex Research" } })); persist();
   },
-  logout() { set(() => ({ user: null, admin: false })); },
-  adminLogin() { set(() => ({ admin: true })); },
-  setWorkspace(workspace: string) { set((s) => ({ user: s.user ? { ...s.user, workspace } : s.user })); },
+  logout() { set(() => ({ user: null, admin: false })); persist(); },
+  adminLogin() { set((s) => ({ admin: true, user: s.user ?? { name: "Operator", email: "ops@scalar.dev", workspace: "Forex Research" } })); persist(); },
+  setWorkspace(workspace: string) { set((s) => ({ user: s.user ? { ...s.user, workspace } : s.user })); persist(); },
 
   createExperiment(input: Omit<Experiment, "id" | "status" | "createdAt" | "owner" | "metrics">) {
     const id = uid("exp");
