@@ -22,6 +22,8 @@ import { Route as ResearchRouteImport } from './routes/research'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppCompareRouteImport } from './routes/app.compare'
+import { Route as AppExperimentsIndexRouteImport } from './routes/app.experiments.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -88,6 +90,16 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCompareRoute = AppCompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExperimentsIndexRoute = AppExperimentsIndexRouteImport.update({
+  id: '/experiments/',
+  path: '/experiments/',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -102,7 +114,9 @@ export interface FileRoutesByFullPath {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/compare': typeof AppCompareRoute
   '/app/': typeof AppIndexRoute
+  '/app/experiments/': typeof AppExperimentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -116,7 +130,9 @@ export interface FileRoutesByTo {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/compare': typeof AppCompareRoute
   '/app': typeof AppIndexRoute
+  '/app/experiments': typeof AppExperimentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -132,7 +148,9 @@ export interface FileRoutesById {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/compare': typeof AppCompareRoute
   '/app/': typeof AppIndexRoute
+  '/app/experiments/': typeof AppExperimentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -149,7 +167,9 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/app/compare'
     | '/app/'
+    | '/app/experiments/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -163,7 +183,9 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/app/compare'
     | '/app'
+    | '/app/experiments'
   id:
     | '__root__'
     | '/'
@@ -178,7 +200,9 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/app/compare'
     | '/app/'
+    | '/app/experiments/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -289,15 +313,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/compare': {
+      id: '/app/compare'
+      path: '/compare'
+      fullPath: '/app/compare'
+      preLoaderRoute: typeof AppCompareRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/experiments/': {
+      id: '/app/experiments/'
+      path: '/experiments'
+      fullPath: '/app/experiments/'
+      preLoaderRoute: typeof AppExperimentsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppCompareRoute: typeof AppCompareRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppExperimentsIndexRoute: typeof AppExperimentsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppCompareRoute: AppCompareRoute,
   AppIndexRoute: AppIndexRoute,
+  AppExperimentsIndexRoute: AppExperimentsIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
