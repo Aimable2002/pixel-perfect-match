@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as CreateWorkspaceRouteImport } from './routes/create-workspace'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as FeaturesRouteImport } from './routes/features'
@@ -20,6 +21,7 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as AppIndexRouteImport } from './routes/app.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin-login',
   path: '/admin-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreateWorkspaceRoute = CreateWorkspaceRouteImport.update({
@@ -76,10 +83,16 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
   path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin-login': typeof AdminLoginRoute
+  '/app': typeof AppRouteWithChildren
   '/create-workspace': typeof CreateWorkspaceRoute
   '/docs': typeof DocsRoute
   '/features': typeof FeaturesRoute
@@ -89,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,11 +116,13 @@ export interface FileRoutesByTo {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin-login': typeof AdminLoginRoute
+  '/app': typeof AppRouteWithChildren
   '/create-workspace': typeof CreateWorkspaceRoute
   '/docs': typeof DocsRoute
   '/features': typeof FeaturesRoute
@@ -116,12 +132,14 @@ export interface FileRoutesById {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/admin-login'
+    | '/app'
     | '/create-workspace'
     | '/docs'
     | '/features'
@@ -131,6 +149,7 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,10 +163,12 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/app'
   id:
     | '__root__'
     | '/'
     | '/admin-login'
+    | '/app'
     | '/create-workspace'
     | '/docs'
     | '/features'
@@ -157,11 +178,13 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AppRoute: typeof AppRouteWithChildren
   CreateWorkspaceRoute: typeof CreateWorkspaceRoute
   DocsRoute: typeof DocsRoute
   FeaturesRoute: typeof FeaturesRoute
@@ -187,6 +210,13 @@ declare module '@tanstack/react-router' {
       path: '/admin-login'
       fullPath: '/admin-login'
       preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/create-workspace': {
@@ -252,12 +282,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
+
+interface AppRouteChildren {
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AppRoute: AppRouteWithChildren,
   CreateWorkspaceRoute: CreateWorkspaceRoute,
   DocsRoute: DocsRoute,
   FeaturesRoute: FeaturesRoute,

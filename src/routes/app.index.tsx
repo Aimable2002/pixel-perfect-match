@@ -9,6 +9,8 @@ import { useFamilyFit } from "@/hooks/useScaling";
 import { useStore } from "@/lib/store";
 import { datetime, usd } from "@/lib/format";
 import { seo } from "@/lib/seo";
+import { runs as mockRuns } from "@/data/mock";
+const baseCompute = mockRuns.reduce((a, r) => a + r.compute, 0);
 
 export const Route = createFileRoute("/app/")({
   head: () => seo("Overview", "Your experiments, runs, compute and scale predictions at a glance."),
@@ -44,7 +46,7 @@ function Overview() {
         <MetricCard label="Active Experiments" value={active + 10} sub="+2 this week" />
         <MetricCard label="Completed Runs" value={completedRuns + 50} sub="last 30 days" />
         <MetricCard label="Datasets" value={datasets.length + 6} sub="2.4 TB indexed" />
-        <MetricCard label="Compute Used" value={usd(184.2 + Math.max(0, compute - runs.slice(-999).reduce((a, r) => a + r.compute, 0)))} sub="of $500 budget" />
+        <MetricCard label="Compute Used" value={usd(184.2 + compute - baseCompute)} sub="of $500 budget" />
         <MetricCard label="Scale Opportunities" value={preds.filter((p) => p.status === "awaiting" || p.status === "predicted").length + 1} tone="predict" sub="predicted worthwhile" />
       </div>
 
