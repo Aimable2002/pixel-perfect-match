@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as CreateWorkspaceRouteImport } from './routes/create-workspace'
@@ -21,8 +22,15 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppCompareRouteImport } from './routes/app.compare'
+import { Route as AppDeploymentsRouteImport } from './routes/app.deployments'
+import { Route as AppResearchRouteImport } from './routes/app.research'
+import { Route as AppScalingRouteImport } from './routes/app.scaling'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppUsageRouteImport } from './routes/app.usage'
+import { Route as AppValidationRouteImport } from './routes/app.validation'
 import { Route as AppDatasetsIndexRouteImport } from './routes/app.datasets.index'
 import { Route as AppDatasetsIdRouteImport } from './routes/app.datasets.$id'
 import { Route as AppExperimentsIndexRouteImport } from './routes/app.experiments.index'
@@ -30,12 +38,19 @@ import { Route as AppExperimentsIdRouteImport } from './routes/app.experiments.$
 import { Route as AppExperimentsNewRouteImport } from './routes/app.experiments.new'
 import { Route as AppModelsIndexRouteImport } from './routes/app.models.index'
 import { Route as AppModelsIdRouteImport } from './routes/app.models.$id'
+import { Route as AppPredictionsIndexRouteImport } from './routes/app.predictions.index'
+import { Route as AppPredictionsIdRouteImport } from './routes/app.predictions.$id'
 import { Route as AppRunsIndexRouteImport } from './routes/app.runs.index'
 import { Route as AppRunsIdRouteImport } from './routes/app.runs.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -93,6 +108,11 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
   path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -101,6 +121,36 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const AppCompareRoute = AppCompareRouteImport.update({
   id: '/compare',
   path: '/compare',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDeploymentsRoute = AppDeploymentsRouteImport.update({
+  id: '/deployments',
+  path: '/deployments',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResearchRoute = AppResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppScalingRoute = AppScalingRouteImport.update({
+  id: '/scaling',
+  path: '/scaling',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppUsageRoute = AppUsageRouteImport.update({
+  id: '/usage',
+  path: '/usage',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppValidationRoute = AppValidationRouteImport.update({
+  id: '/validation',
+  path: '/validation',
   getParentRoute: () => AppRoute,
 } as any)
 const AppDatasetsIndexRoute = AppDatasetsIndexRouteImport.update({
@@ -138,6 +188,16 @@ const AppModelsIdRoute = AppModelsIdRouteImport.update({
   path: '/models/$id',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPredictionsIndexRoute = AppPredictionsIndexRouteImport.update({
+  id: '/predictions/',
+  path: '/predictions/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPredictionsIdRoute = AppPredictionsIdRouteImport.update({
+  id: '/predictions/$id',
+  path: '/predictions/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppRunsIndexRoute = AppRunsIndexRouteImport.update({
   id: '/runs/',
   path: '/runs/',
@@ -151,6 +211,7 @@ const AppRunsIdRoute = AppRunsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
   '/app': typeof AppRouteWithChildren
   '/create-workspace': typeof CreateWorkspaceRoute
@@ -163,15 +224,24 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
   '/app/compare': typeof AppCompareRoute
+  '/app/deployments': typeof AppDeploymentsRoute
+  '/app/research': typeof AppResearchRoute
+  '/app/scaling': typeof AppScalingRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/usage': typeof AppUsageRoute
+  '/app/validation': typeof AppValidationRoute
+  '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
   '/app/datasets/$id': typeof AppDatasetsIdRoute
   '/app/experiments/$id': typeof AppExperimentsIdRoute
   '/app/experiments/new': typeof AppExperimentsNewRoute
   '/app/models/$id': typeof AppModelsIdRoute
+  '/app/predictions/$id': typeof AppPredictionsIdRoute
   '/app/runs/$id': typeof AppRunsIdRoute
   '/app/datasets/': typeof AppDatasetsIndexRoute
   '/app/experiments/': typeof AppExperimentsIndexRoute
   '/app/models/': typeof AppModelsIndexRoute
+  '/app/predictions/': typeof AppPredictionsIndexRoute
   '/app/runs/': typeof AppRunsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -187,20 +257,30 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
   '/app/compare': typeof AppCompareRoute
+  '/app/deployments': typeof AppDeploymentsRoute
+  '/app/research': typeof AppResearchRoute
+  '/app/scaling': typeof AppScalingRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/usage': typeof AppUsageRoute
+  '/app/validation': typeof AppValidationRoute
+  '/admin': typeof AdminIndexRoute
   '/app': typeof AppIndexRoute
   '/app/datasets/$id': typeof AppDatasetsIdRoute
   '/app/experiments/$id': typeof AppExperimentsIdRoute
   '/app/experiments/new': typeof AppExperimentsNewRoute
   '/app/models/$id': typeof AppModelsIdRoute
+  '/app/predictions/$id': typeof AppPredictionsIdRoute
   '/app/runs/$id': typeof AppRunsIdRoute
   '/app/datasets': typeof AppDatasetsIndexRoute
   '/app/experiments': typeof AppExperimentsIndexRoute
   '/app/models': typeof AppModelsIndexRoute
+  '/app/predictions': typeof AppPredictionsIndexRoute
   '/app/runs': typeof AppRunsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
   '/app': typeof AppRouteWithChildren
   '/create-workspace': typeof CreateWorkspaceRoute
@@ -213,21 +293,31 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
   '/app/compare': typeof AppCompareRoute
+  '/app/deployments': typeof AppDeploymentsRoute
+  '/app/research': typeof AppResearchRoute
+  '/app/scaling': typeof AppScalingRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/usage': typeof AppUsageRoute
+  '/app/validation': typeof AppValidationRoute
+  '/admin/': typeof AdminIndexRoute
   '/app/': typeof AppIndexRoute
   '/app/datasets/$id': typeof AppDatasetsIdRoute
   '/app/experiments/$id': typeof AppExperimentsIdRoute
   '/app/experiments/new': typeof AppExperimentsNewRoute
   '/app/models/$id': typeof AppModelsIdRoute
+  '/app/predictions/$id': typeof AppPredictionsIdRoute
   '/app/runs/$id': typeof AppRunsIdRoute
   '/app/datasets/': typeof AppDatasetsIndexRoute
   '/app/experiments/': typeof AppExperimentsIndexRoute
   '/app/models/': typeof AppModelsIndexRoute
+  '/app/predictions/': typeof AppPredictionsIndexRoute
   '/app/runs/': typeof AppRunsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/admin-login'
     | '/app'
     | '/create-workspace'
@@ -240,15 +330,24 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify-email'
     | '/app/compare'
+    | '/app/deployments'
+    | '/app/research'
+    | '/app/scaling'
+    | '/app/settings'
+    | '/app/usage'
+    | '/app/validation'
+    | '/admin/'
     | '/app/'
     | '/app/datasets/$id'
     | '/app/experiments/$id'
     | '/app/experiments/new'
     | '/app/models/$id'
+    | '/app/predictions/$id'
     | '/app/runs/$id'
     | '/app/datasets/'
     | '/app/experiments/'
     | '/app/models/'
+    | '/app/predictions/'
     | '/app/runs/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -264,19 +363,29 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify-email'
     | '/app/compare'
+    | '/app/deployments'
+    | '/app/research'
+    | '/app/scaling'
+    | '/app/settings'
+    | '/app/usage'
+    | '/app/validation'
+    | '/admin'
     | '/app'
     | '/app/datasets/$id'
     | '/app/experiments/$id'
     | '/app/experiments/new'
     | '/app/models/$id'
+    | '/app/predictions/$id'
     | '/app/runs/$id'
     | '/app/datasets'
     | '/app/experiments'
     | '/app/models'
+    | '/app/predictions'
     | '/app/runs'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/admin-login'
     | '/app'
     | '/create-workspace'
@@ -289,20 +398,30 @@ export interface FileRouteTypes {
     | '/signup'
     | '/verify-email'
     | '/app/compare'
+    | '/app/deployments'
+    | '/app/research'
+    | '/app/scaling'
+    | '/app/settings'
+    | '/app/usage'
+    | '/app/validation'
+    | '/admin/'
     | '/app/'
     | '/app/datasets/$id'
     | '/app/experiments/$id'
     | '/app/experiments/new'
     | '/app/models/$id'
+    | '/app/predictions/$id'
     | '/app/runs/$id'
     | '/app/datasets/'
     | '/app/experiments/'
     | '/app/models/'
+    | '/app/predictions/'
     | '/app/runs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AppRoute: typeof AppRouteWithChildren
   CreateWorkspaceRoute: typeof CreateWorkspaceRoute
@@ -323,6 +442,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin-login': {
@@ -402,6 +528,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/app/': {
       id: '/app/'
       path: '/'
@@ -414,6 +547,48 @@ declare module '@tanstack/react-router' {
       path: '/compare'
       fullPath: '/app/compare'
       preLoaderRoute: typeof AppCompareRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/deployments': {
+      id: '/app/deployments'
+      path: '/deployments'
+      fullPath: '/app/deployments'
+      preLoaderRoute: typeof AppDeploymentsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/research': {
+      id: '/app/research'
+      path: '/research'
+      fullPath: '/app/research'
+      preLoaderRoute: typeof AppResearchRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/scaling': {
+      id: '/app/scaling'
+      path: '/scaling'
+      fullPath: '/app/scaling'
+      preLoaderRoute: typeof AppScalingRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/usage': {
+      id: '/app/usage'
+      path: '/usage'
+      fullPath: '/app/usage'
+      preLoaderRoute: typeof AppUsageRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/validation': {
+      id: '/app/validation'
+      path: '/validation'
+      fullPath: '/app/validation'
+      preLoaderRoute: typeof AppValidationRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/datasets/': {
@@ -465,6 +640,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppModelsIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/predictions/': {
+      id: '/app/predictions/'
+      path: '/predictions'
+      fullPath: '/app/predictions/'
+      preLoaderRoute: typeof AppPredictionsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/predictions/$id': {
+      id: '/app/predictions/$id'
+      path: '/predictions/$id'
+      fullPath: '/app/predictions/$id'
+      preLoaderRoute: typeof AppPredictionsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/runs/': {
       id: '/app/runs/'
       path: '/runs'
@@ -482,31 +671,57 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface AppRouteChildren {
   AppCompareRoute: typeof AppCompareRoute
+  AppDeploymentsRoute: typeof AppDeploymentsRoute
+  AppResearchRoute: typeof AppResearchRoute
+  AppScalingRoute: typeof AppScalingRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppUsageRoute: typeof AppUsageRoute
+  AppValidationRoute: typeof AppValidationRoute
   AppIndexRoute: typeof AppIndexRoute
   AppDatasetsIdRoute: typeof AppDatasetsIdRoute
   AppExperimentsIdRoute: typeof AppExperimentsIdRoute
   AppExperimentsNewRoute: typeof AppExperimentsNewRoute
   AppModelsIdRoute: typeof AppModelsIdRoute
+  AppPredictionsIdRoute: typeof AppPredictionsIdRoute
   AppRunsIdRoute: typeof AppRunsIdRoute
   AppDatasetsIndexRoute: typeof AppDatasetsIndexRoute
   AppExperimentsIndexRoute: typeof AppExperimentsIndexRoute
   AppModelsIndexRoute: typeof AppModelsIndexRoute
+  AppPredictionsIndexRoute: typeof AppPredictionsIndexRoute
   AppRunsIndexRoute: typeof AppRunsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppCompareRoute: AppCompareRoute,
+  AppDeploymentsRoute: AppDeploymentsRoute,
+  AppResearchRoute: AppResearchRoute,
+  AppScalingRoute: AppScalingRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppUsageRoute: AppUsageRoute,
+  AppValidationRoute: AppValidationRoute,
   AppIndexRoute: AppIndexRoute,
   AppDatasetsIdRoute: AppDatasetsIdRoute,
   AppExperimentsIdRoute: AppExperimentsIdRoute,
   AppExperimentsNewRoute: AppExperimentsNewRoute,
   AppModelsIdRoute: AppModelsIdRoute,
+  AppPredictionsIdRoute: AppPredictionsIdRoute,
   AppRunsIdRoute: AppRunsIdRoute,
   AppDatasetsIndexRoute: AppDatasetsIndexRoute,
   AppExperimentsIndexRoute: AppExperimentsIndexRoute,
   AppModelsIndexRoute: AppModelsIndexRoute,
+  AppPredictionsIndexRoute: AppPredictionsIndexRoute,
   AppRunsIndexRoute: AppRunsIndexRoute,
 }
 
@@ -514,6 +729,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AppRoute: AppRouteWithChildren,
   CreateWorkspaceRoute: CreateWorkspaceRoute,
