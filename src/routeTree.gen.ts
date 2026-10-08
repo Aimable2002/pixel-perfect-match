@@ -23,8 +23,15 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppCompareRouteImport } from './routes/app.compare'
+import { Route as AppDatasetsIndexRouteImport } from './routes/app.datasets.index'
+import { Route as AppDatasetsIdRouteImport } from './routes/app.datasets.$id'
 import { Route as AppExperimentsIndexRouteImport } from './routes/app.experiments.index'
 import { Route as AppExperimentsIdRouteImport } from './routes/app.experiments.$id'
+import { Route as AppExperimentsNewRouteImport } from './routes/app.experiments.new'
+import { Route as AppModelsIndexRouteImport } from './routes/app.models.index'
+import { Route as AppModelsIdRouteImport } from './routes/app.models.$id'
+import { Route as AppRunsIndexRouteImport } from './routes/app.runs.index'
+import { Route as AppRunsIdRouteImport } from './routes/app.runs.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -96,6 +103,16 @@ const AppCompareRoute = AppCompareRouteImport.update({
   path: '/compare',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDatasetsIndexRoute = AppDatasetsIndexRouteImport.update({
+  id: '/datasets/',
+  path: '/datasets/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDatasetsIdRoute = AppDatasetsIdRouteImport.update({
+  id: '/datasets/$id',
+  path: '/datasets/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppExperimentsIndexRoute = AppExperimentsIndexRouteImport.update({
   id: '/experiments/',
   path: '/experiments/',
@@ -104,6 +121,31 @@ const AppExperimentsIndexRoute = AppExperimentsIndexRouteImport.update({
 const AppExperimentsIdRoute = AppExperimentsIdRouteImport.update({
   id: '/experiments/$id',
   path: '/experiments/$id',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExperimentsNewRoute = AppExperimentsNewRouteImport.update({
+  id: '/experiments/new',
+  path: '/experiments/new',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppModelsIndexRoute = AppModelsIndexRouteImport.update({
+  id: '/models/',
+  path: '/models/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppModelsIdRoute = AppModelsIdRouteImport.update({
+  id: '/models/$id',
+  path: '/models/$id',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRunsIndexRoute = AppRunsIndexRouteImport.update({
+  id: '/runs/',
+  path: '/runs/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRunsIdRoute = AppRunsIdRouteImport.update({
+  id: '/runs/$id',
+  path: '/runs/$id',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -122,8 +164,15 @@ export interface FileRoutesByFullPath {
   '/verify-email': typeof VerifyEmailRoute
   '/app/compare': typeof AppCompareRoute
   '/app/': typeof AppIndexRoute
+  '/app/datasets/$id': typeof AppDatasetsIdRoute
   '/app/experiments/$id': typeof AppExperimentsIdRoute
+  '/app/experiments/new': typeof AppExperimentsNewRoute
+  '/app/models/$id': typeof AppModelsIdRoute
+  '/app/runs/$id': typeof AppRunsIdRoute
+  '/app/datasets/': typeof AppDatasetsIndexRoute
   '/app/experiments/': typeof AppExperimentsIndexRoute
+  '/app/models/': typeof AppModelsIndexRoute
+  '/app/runs/': typeof AppRunsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -139,8 +188,15 @@ export interface FileRoutesByTo {
   '/verify-email': typeof VerifyEmailRoute
   '/app/compare': typeof AppCompareRoute
   '/app': typeof AppIndexRoute
+  '/app/datasets/$id': typeof AppDatasetsIdRoute
   '/app/experiments/$id': typeof AppExperimentsIdRoute
+  '/app/experiments/new': typeof AppExperimentsNewRoute
+  '/app/models/$id': typeof AppModelsIdRoute
+  '/app/runs/$id': typeof AppRunsIdRoute
+  '/app/datasets': typeof AppDatasetsIndexRoute
   '/app/experiments': typeof AppExperimentsIndexRoute
+  '/app/models': typeof AppModelsIndexRoute
+  '/app/runs': typeof AppRunsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -158,8 +214,15 @@ export interface FileRoutesById {
   '/verify-email': typeof VerifyEmailRoute
   '/app/compare': typeof AppCompareRoute
   '/app/': typeof AppIndexRoute
+  '/app/datasets/$id': typeof AppDatasetsIdRoute
   '/app/experiments/$id': typeof AppExperimentsIdRoute
+  '/app/experiments/new': typeof AppExperimentsNewRoute
+  '/app/models/$id': typeof AppModelsIdRoute
+  '/app/runs/$id': typeof AppRunsIdRoute
+  '/app/datasets/': typeof AppDatasetsIndexRoute
   '/app/experiments/': typeof AppExperimentsIndexRoute
+  '/app/models/': typeof AppModelsIndexRoute
+  '/app/runs/': typeof AppRunsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -178,8 +241,15 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/app/compare'
     | '/app/'
+    | '/app/datasets/$id'
     | '/app/experiments/$id'
+    | '/app/experiments/new'
+    | '/app/models/$id'
+    | '/app/runs/$id'
+    | '/app/datasets/'
     | '/app/experiments/'
+    | '/app/models/'
+    | '/app/runs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,8 +265,15 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/app/compare'
     | '/app'
+    | '/app/datasets/$id'
     | '/app/experiments/$id'
+    | '/app/experiments/new'
+    | '/app/models/$id'
+    | '/app/runs/$id'
+    | '/app/datasets'
     | '/app/experiments'
+    | '/app/models'
+    | '/app/runs'
   id:
     | '__root__'
     | '/'
@@ -213,8 +290,15 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/app/compare'
     | '/app/'
+    | '/app/datasets/$id'
     | '/app/experiments/$id'
+    | '/app/experiments/new'
+    | '/app/models/$id'
+    | '/app/runs/$id'
+    | '/app/datasets/'
     | '/app/experiments/'
+    | '/app/models/'
+    | '/app/runs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -332,6 +416,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCompareRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/datasets/': {
+      id: '/app/datasets/'
+      path: '/datasets'
+      fullPath: '/app/datasets/'
+      preLoaderRoute: typeof AppDatasetsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/datasets/$id': {
+      id: '/app/datasets/$id'
+      path: '/datasets/$id'
+      fullPath: '/app/datasets/$id'
+      preLoaderRoute: typeof AppDatasetsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/experiments/': {
       id: '/app/experiments/'
       path: '/experiments'
@@ -346,21 +444,70 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppExperimentsIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/experiments/new': {
+      id: '/app/experiments/new'
+      path: '/experiments/new'
+      fullPath: '/app/experiments/new'
+      preLoaderRoute: typeof AppExperimentsNewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/models/': {
+      id: '/app/models/'
+      path: '/models'
+      fullPath: '/app/models/'
+      preLoaderRoute: typeof AppModelsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/models/$id': {
+      id: '/app/models/$id'
+      path: '/models/$id'
+      fullPath: '/app/models/$id'
+      preLoaderRoute: typeof AppModelsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/runs/': {
+      id: '/app/runs/'
+      path: '/runs'
+      fullPath: '/app/runs/'
+      preLoaderRoute: typeof AppRunsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/runs/$id': {
+      id: '/app/runs/$id'
+      path: '/runs/$id'
+      fullPath: '/app/runs/$id'
+      preLoaderRoute: typeof AppRunsIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
   AppCompareRoute: typeof AppCompareRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppDatasetsIdRoute: typeof AppDatasetsIdRoute
   AppExperimentsIdRoute: typeof AppExperimentsIdRoute
+  AppExperimentsNewRoute: typeof AppExperimentsNewRoute
+  AppModelsIdRoute: typeof AppModelsIdRoute
+  AppRunsIdRoute: typeof AppRunsIdRoute
+  AppDatasetsIndexRoute: typeof AppDatasetsIndexRoute
   AppExperimentsIndexRoute: typeof AppExperimentsIndexRoute
+  AppModelsIndexRoute: typeof AppModelsIndexRoute
+  AppRunsIndexRoute: typeof AppRunsIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppCompareRoute: AppCompareRoute,
   AppIndexRoute: AppIndexRoute,
+  AppDatasetsIdRoute: AppDatasetsIdRoute,
   AppExperimentsIdRoute: AppExperimentsIdRoute,
+  AppExperimentsNewRoute: AppExperimentsNewRoute,
+  AppModelsIdRoute: AppModelsIdRoute,
+  AppRunsIdRoute: AppRunsIdRoute,
+  AppDatasetsIndexRoute: AppDatasetsIndexRoute,
   AppExperimentsIndexRoute: AppExperimentsIndexRoute,
+  AppModelsIndexRoute: AppModelsIndexRoute,
+  AppRunsIndexRoute: AppRunsIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
