@@ -23,6 +23,20 @@ import { Route as ResearchRouteImport } from './routes/research'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAuditRouteImport } from './routes/admin.audit'
+import { Route as AdminBillingRouteImport } from './routes/admin.billing'
+import { Route as AdminComputeRouteImport } from './routes/admin.compute'
+import { Route as AdminDatasetsRouteImport } from './routes/admin.datasets'
+import { Route as AdminDeploymentsRouteImport } from './routes/admin.deployments'
+import { Route as AdminExperimentsRouteImport } from './routes/admin.experiments'
+import { Route as AdminHealthRouteImport } from './routes/admin.health'
+import { Route as AdminModelsRouteImport } from './routes/admin.models'
+import { Route as AdminOrganizationsRouteImport } from './routes/admin.organizations'
+import { Route as AdminPredictionsRouteImport } from './routes/admin.predictions'
+import { Route as AdminRunsRouteImport } from './routes/admin.runs'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminUsageRouteImport } from './routes/admin.usage'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppCompareRouteImport } from './routes/app.compare'
 import { Route as AppDeploymentsRouteImport } from './routes/app.deployments'
@@ -111,6 +125,76 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAuditRoute = AdminAuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBillingRoute = AdminBillingRouteImport.update({
+  id: '/billing',
+  path: '/billing',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminComputeRoute = AdminComputeRouteImport.update({
+  id: '/compute',
+  path: '/compute',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDatasetsRoute = AdminDatasetsRouteImport.update({
+  id: '/datasets',
+  path: '/datasets',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDeploymentsRoute = AdminDeploymentsRouteImport.update({
+  id: '/deployments',
+  path: '/deployments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminExperimentsRoute = AdminExperimentsRouteImport.update({
+  id: '/experiments',
+  path: '/experiments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminHealthRoute = AdminHealthRouteImport.update({
+  id: '/health',
+  path: '/health',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminModelsRoute = AdminModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrganizationsRoute = AdminOrganizationsRouteImport.update({
+  id: '/organizations',
+  path: '/organizations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPredictionsRoute = AdminPredictionsRouteImport.update({
+  id: '/predictions',
+  path: '/predictions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRunsRoute = AdminRunsRouteImport.update({
+  id: '/runs',
+  path: '/runs',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsageRoute = AdminUsageRouteImport.update({
+  id: '/usage',
+  path: '/usage',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => AdminRoute,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
@@ -223,6 +307,20 @@ export interface FileRoutesByFullPath {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/billing': typeof AdminBillingRoute
+  '/admin/compute': typeof AdminComputeRoute
+  '/admin/datasets': typeof AdminDatasetsRoute
+  '/admin/deployments': typeof AdminDeploymentsRoute
+  '/admin/experiments': typeof AdminExperimentsRoute
+  '/admin/health': typeof AdminHealthRoute
+  '/admin/models': typeof AdminModelsRoute
+  '/admin/organizations': typeof AdminOrganizationsRoute
+  '/admin/predictions': typeof AdminPredictionsRoute
+  '/admin/runs': typeof AdminRunsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/usage': typeof AdminUsageRoute
+  '/admin/users': typeof AdminUsersRoute
   '/app/compare': typeof AppCompareRoute
   '/app/deployments': typeof AppDeploymentsRoute
   '/app/research': typeof AppResearchRoute
@@ -256,6 +354,20 @@ export interface FileRoutesByTo {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/billing': typeof AdminBillingRoute
+  '/admin/compute': typeof AdminComputeRoute
+  '/admin/datasets': typeof AdminDatasetsRoute
+  '/admin/deployments': typeof AdminDeploymentsRoute
+  '/admin/experiments': typeof AdminExperimentsRoute
+  '/admin/health': typeof AdminHealthRoute
+  '/admin/models': typeof AdminModelsRoute
+  '/admin/organizations': typeof AdminOrganizationsRoute
+  '/admin/predictions': typeof AdminPredictionsRoute
+  '/admin/runs': typeof AdminRunsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/usage': typeof AdminUsageRoute
+  '/admin/users': typeof AdminUsersRoute
   '/app/compare': typeof AppCompareRoute
   '/app/deployments': typeof AppDeploymentsRoute
   '/app/research': typeof AppResearchRoute
@@ -292,6 +404,20 @@ export interface FileRoutesById {
   '/research': typeof ResearchRoute
   '/signup': typeof SignupRoute
   '/verify-email': typeof VerifyEmailRoute
+  '/admin/audit': typeof AdminAuditRoute
+  '/admin/billing': typeof AdminBillingRoute
+  '/admin/compute': typeof AdminComputeRoute
+  '/admin/datasets': typeof AdminDatasetsRoute
+  '/admin/deployments': typeof AdminDeploymentsRoute
+  '/admin/experiments': typeof AdminExperimentsRoute
+  '/admin/health': typeof AdminHealthRoute
+  '/admin/models': typeof AdminModelsRoute
+  '/admin/organizations': typeof AdminOrganizationsRoute
+  '/admin/predictions': typeof AdminPredictionsRoute
+  '/admin/runs': typeof AdminRunsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/usage': typeof AdminUsageRoute
+  '/admin/users': typeof AdminUsersRoute
   '/app/compare': typeof AppCompareRoute
   '/app/deployments': typeof AppDeploymentsRoute
   '/app/research': typeof AppResearchRoute
@@ -329,6 +455,20 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/admin/audit'
+    | '/admin/billing'
+    | '/admin/compute'
+    | '/admin/datasets'
+    | '/admin/deployments'
+    | '/admin/experiments'
+    | '/admin/health'
+    | '/admin/models'
+    | '/admin/organizations'
+    | '/admin/predictions'
+    | '/admin/runs'
+    | '/admin/settings'
+    | '/admin/usage'
+    | '/admin/users'
     | '/app/compare'
     | '/app/deployments'
     | '/app/research'
@@ -362,6 +502,20 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/admin/audit'
+    | '/admin/billing'
+    | '/admin/compute'
+    | '/admin/datasets'
+    | '/admin/deployments'
+    | '/admin/experiments'
+    | '/admin/health'
+    | '/admin/models'
+    | '/admin/organizations'
+    | '/admin/predictions'
+    | '/admin/runs'
+    | '/admin/settings'
+    | '/admin/usage'
+    | '/admin/users'
     | '/app/compare'
     | '/app/deployments'
     | '/app/research'
@@ -397,6 +551,20 @@ export interface FileRouteTypes {
     | '/research'
     | '/signup'
     | '/verify-email'
+    | '/admin/audit'
+    | '/admin/billing'
+    | '/admin/compute'
+    | '/admin/datasets'
+    | '/admin/deployments'
+    | '/admin/experiments'
+    | '/admin/health'
+    | '/admin/models'
+    | '/admin/organizations'
+    | '/admin/predictions'
+    | '/admin/runs'
+    | '/admin/settings'
+    | '/admin/usage'
+    | '/admin/users'
     | '/app/compare'
     | '/app/deployments'
     | '/app/research'
@@ -533,6 +701,104 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/audit': {
+      id: '/admin/audit'
+      path: '/audit'
+      fullPath: '/admin/audit'
+      preLoaderRoute: typeof AdminAuditRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/billing': {
+      id: '/admin/billing'
+      path: '/billing'
+      fullPath: '/admin/billing'
+      preLoaderRoute: typeof AdminBillingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/compute': {
+      id: '/admin/compute'
+      path: '/compute'
+      fullPath: '/admin/compute'
+      preLoaderRoute: typeof AdminComputeRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/datasets': {
+      id: '/admin/datasets'
+      path: '/datasets'
+      fullPath: '/admin/datasets'
+      preLoaderRoute: typeof AdminDatasetsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/deployments': {
+      id: '/admin/deployments'
+      path: '/deployments'
+      fullPath: '/admin/deployments'
+      preLoaderRoute: typeof AdminDeploymentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/experiments': {
+      id: '/admin/experiments'
+      path: '/experiments'
+      fullPath: '/admin/experiments'
+      preLoaderRoute: typeof AdminExperimentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/health': {
+      id: '/admin/health'
+      path: '/health'
+      fullPath: '/admin/health'
+      preLoaderRoute: typeof AdminHealthRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/models': {
+      id: '/admin/models'
+      path: '/models'
+      fullPath: '/admin/models'
+      preLoaderRoute: typeof AdminModelsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/organizations': {
+      id: '/admin/organizations'
+      path: '/organizations'
+      fullPath: '/admin/organizations'
+      preLoaderRoute: typeof AdminOrganizationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/predictions': {
+      id: '/admin/predictions'
+      path: '/predictions'
+      fullPath: '/admin/predictions'
+      preLoaderRoute: typeof AdminPredictionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/runs': {
+      id: '/admin/runs'
+      path: '/runs'
+      fullPath: '/admin/runs'
+      preLoaderRoute: typeof AdminRunsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/usage': {
+      id: '/admin/usage'
+      path: '/usage'
+      fullPath: '/admin/usage'
+      preLoaderRoute: typeof AdminUsageRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
     }
     '/app/': {
@@ -672,10 +938,38 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminAuditRoute: typeof AdminAuditRoute
+  AdminBillingRoute: typeof AdminBillingRoute
+  AdminComputeRoute: typeof AdminComputeRoute
+  AdminDatasetsRoute: typeof AdminDatasetsRoute
+  AdminDeploymentsRoute: typeof AdminDeploymentsRoute
+  AdminExperimentsRoute: typeof AdminExperimentsRoute
+  AdminHealthRoute: typeof AdminHealthRoute
+  AdminModelsRoute: typeof AdminModelsRoute
+  AdminOrganizationsRoute: typeof AdminOrganizationsRoute
+  AdminPredictionsRoute: typeof AdminPredictionsRoute
+  AdminRunsRoute: typeof AdminRunsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsageRoute: typeof AdminUsageRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAuditRoute: AdminAuditRoute,
+  AdminBillingRoute: AdminBillingRoute,
+  AdminComputeRoute: AdminComputeRoute,
+  AdminDatasetsRoute: AdminDatasetsRoute,
+  AdminDeploymentsRoute: AdminDeploymentsRoute,
+  AdminExperimentsRoute: AdminExperimentsRoute,
+  AdminHealthRoute: AdminHealthRoute,
+  AdminModelsRoute: AdminModelsRoute,
+  AdminOrganizationsRoute: AdminOrganizationsRoute,
+  AdminPredictionsRoute: AdminPredictionsRoute,
+  AdminRunsRoute: AdminRunsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsageRoute: AdminUsageRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
