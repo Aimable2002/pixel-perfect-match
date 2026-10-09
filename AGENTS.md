@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- TypeScript runs strict but without exactOptionalPropertyTypes/noUncheckedIndexedAccess — they produced noise across UI props without catching real bugs.
